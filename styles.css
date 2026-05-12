@@ -1,6 +1,6 @@
 :root {
   --ink: #fff6dd;
-  --muted: #a39e8b;
+  --muted: #9d9787;
   --gold: #ffc857;
   --bg: #05070a;
   color-scheme: dark;
@@ -22,8 +22,8 @@ html, body {
 body {
   position: relative;
   background:
-    radial-gradient(ellipse at 50% 0%, rgba(255, 200, 87, 0.10), transparent 60%),
-    radial-gradient(ellipse at 50% 100%, rgba(182, 76, 255, 0.10), transparent 55%),
+    radial-gradient(ellipse 60% 50% at 50% 38%, rgba(255, 200, 87, 0.16), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(182, 76, 255, 0.10), transparent 70%),
     linear-gradient(180deg, #0a0d14 0%, #05070a 60%, #02030a 100%);
 }
 
@@ -32,15 +32,16 @@ body::before {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 50% 50%, transparent 30%, rgba(0,0,0,0.55) 100%);
+    radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(0,0,0,0.6) 100%);
   pointer-events: none;
+  z-index: 1;
 }
 
 .stage {
   position: relative;
   z-index: 2;
   height: 100svh;
-  width: min(720px, calc(100% - 40px));
+  width: min(640px, calc(100% - 32px));
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -50,28 +51,20 @@ body::before {
   padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
 }
 
-.eyebrow {
-  margin: 0 0 18px;
-  color: var(--gold);
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-}
-
 .logo {
   margin: 0;
   font-size: 0;
   line-height: 0;
-  animation: drift 9s ease-in-out infinite alternate;
+  animation: drift 8s ease-in-out infinite alternate;
 }
 
 .logo img {
-  width: min(86vw, 640px);
+  width: clamp(260px, 62vw, 440px);
   height: auto;
   display: block;
-  filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.55))
-          drop-shadow(0 0 60px rgba(255, 200, 87, 0.18));
+  filter:
+    drop-shadow(0 20px 32px rgba(0, 0, 0, 0.55))
+    drop-shadow(0 0 70px rgba(255, 200, 87, 0.18));
 }
 
 @keyframes drift {
@@ -80,26 +73,61 @@ body::before {
 }
 
 .tagline {
-  max-width: 36ch;
-  margin: 28px 0 0;
+  max-width: 28ch;
+  margin: 32px 0 0;
   color: var(--ink);
-  font-size: clamp(1rem, 2.4vw, 1.2rem);
+  font-size: clamp(0.98rem, 2vw, 1.1rem);
   line-height: 1.55;
-  opacity: 0.92;
+  opacity: 0.88;
+}
+
+.badge {
+  margin: 28px 0 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 14px 7px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 200, 87, 0.32);
+  background: rgba(255, 200, 87, 0.06);
+  color: var(--gold);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 10px rgba(255, 200, 87, 0.9);
+  animation: pulse 2.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1;   transform: scale(1); }
+  50%      { opacity: 0.4; transform: scale(0.85); }
 }
 
 .byline {
-  margin: 36px 0 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(20px + env(safe-area-inset-bottom));
+  margin: 0;
   color: var(--muted);
-  font-size: 0.85rem;
-  letter-spacing: 0.04em;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
 }
 
 .byline a {
   color: var(--ink);
   text-decoration: none;
-  border-bottom: 1px solid rgba(255, 246, 221, 0.3);
+  border-bottom: 1px solid rgba(255, 246, 221, 0.25);
   padding-bottom: 1px;
+  transition: color 0.2s, border-color 0.2s;
 }
 
 .byline a:hover {
@@ -110,7 +138,7 @@ body::before {
 .sparks {
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 0;
   overflow: hidden;
   pointer-events: none;
 }
@@ -121,8 +149,8 @@ body::before {
   width: 2px;
   height: 2px;
   border-radius: 50%;
-  background: rgba(255, 246, 221, 0.85);
-  box-shadow: 0 0 8px rgba(255, 200, 87, 0.6);
+  background: rgba(255, 246, 221, 0.8);
+  box-shadow: 0 0 6px rgba(255, 200, 87, 0.5);
   animation: fall linear infinite;
   will-change: transform, opacity;
 }
@@ -134,28 +162,28 @@ body::before {
   100% { transform: translate3d(0, 110vh, 0); opacity: 0; }
 }
 
-.sparks span:nth-child(1)  { left:  4%; animation-duration:  7s; animation-delay: -1s; }
-.sparks span:nth-child(2)  { left: 11%; animation-duration:  9s; animation-delay: -4s; width: 1px; height: 1px; }
-.sparks span:nth-child(3)  { left: 17%; animation-duration:  6s; animation-delay: -2s; }
-.sparks span:nth-child(4)  { left: 23%; animation-duration: 11s; animation-delay: -6s; width: 3px; height: 3px; }
-.sparks span:nth-child(5)  { left: 29%; animation-duration:  8s; animation-delay:  0s; width: 1px; height: 1px; }
-.sparks span:nth-child(6)  { left: 35%; animation-duration: 10s; animation-delay: -3s; }
-.sparks span:nth-child(7)  { left: 41%; animation-duration:  7s; animation-delay: -5s; width: 1px; height: 1px; }
-.sparks span:nth-child(8)  { left: 47%; animation-duration: 12s; animation-delay: -2s; width: 2px; height: 2px; }
-.sparks span:nth-child(9)  { left: 53%; animation-duration:  9s; animation-delay: -7s; }
-.sparks span:nth-child(10) { left: 59%; animation-duration:  6s; animation-delay: -1s; width: 1px; height: 1px; }
-.sparks span:nth-child(11) { left: 65%; animation-duration: 11s; animation-delay: -4s; width: 3px; height: 3px; }
-.sparks span:nth-child(12) { left: 71%; animation-duration:  8s; animation-delay: -6s; }
-.sparks span:nth-child(13) { left: 77%; animation-duration:  9s; animation-delay: -2s; width: 1px; height: 1px; }
-.sparks span:nth-child(14) { left: 83%; animation-duration:  7s; animation-delay: -3s; }
-.sparks span:nth-child(15) { left: 89%; animation-duration: 10s; animation-delay: -5s; width: 2px; height: 2px; }
-.sparks span:nth-child(16) { left:  8%; animation-duration: 13s; animation-delay: -8s; width: 1px; height: 1px; }
-.sparks span:nth-child(17) { left: 26%; animation-duration: 14s; animation-delay: -3s; width: 1px; height: 1px; }
-.sparks span:nth-child(18) { left: 44%; animation-duration: 13s; animation-delay: -9s; width: 1px; height: 1px; }
-.sparks span:nth-child(19) { left: 68%; animation-duration: 14s; animation-delay: -6s; width: 1px; height: 1px; }
-.sparks span:nth-child(20) { left: 92%; animation-duration: 12s; animation-delay: -4s; width: 1px; height: 1px; }
+.sparks span:nth-child(1)  { left:  4%; animation-duration:  9s; animation-delay: -1s; }
+.sparks span:nth-child(2)  { left: 11%; animation-duration: 11s; animation-delay: -4s; width: 1px; height: 1px; }
+.sparks span:nth-child(3)  { left: 17%; animation-duration:  8s; animation-delay: -2s; }
+.sparks span:nth-child(4)  { left: 23%; animation-duration: 13s; animation-delay: -6s; width: 3px; height: 3px; }
+.sparks span:nth-child(5)  { left: 29%; animation-duration: 10s; animation-delay:  0s; width: 1px; height: 1px; }
+.sparks span:nth-child(6)  { left: 35%; animation-duration: 12s; animation-delay: -3s; }
+.sparks span:nth-child(7)  { left: 41%; animation-duration:  9s; animation-delay: -5s; width: 1px; height: 1px; }
+.sparks span:nth-child(8)  { left: 47%; animation-duration: 14s; animation-delay: -2s; width: 2px; height: 2px; }
+.sparks span:nth-child(9)  { left: 53%; animation-duration: 11s; animation-delay: -7s; }
+.sparks span:nth-child(10) { left: 59%; animation-duration:  8s; animation-delay: -1s; width: 1px; height: 1px; }
+.sparks span:nth-child(11) { left: 65%; animation-duration: 13s; animation-delay: -4s; width: 3px; height: 3px; }
+.sparks span:nth-child(12) { left: 71%; animation-duration: 10s; animation-delay: -6s; }
+.sparks span:nth-child(13) { left: 77%; animation-duration: 11s; animation-delay: -2s; width: 1px; height: 1px; }
+.sparks span:nth-child(14) { left: 83%; animation-duration:  9s; animation-delay: -3s; }
+.sparks span:nth-child(15) { left: 89%; animation-duration: 12s; animation-delay: -5s; width: 2px; height: 2px; }
+.sparks span:nth-child(16) { left:  8%; animation-duration: 15s; animation-delay: -8s; width: 1px; height: 1px; }
+.sparks span:nth-child(17) { left: 26%; animation-duration: 16s; animation-delay: -3s; width: 1px; height: 1px; }
+.sparks span:nth-child(18) { left: 44%; animation-duration: 15s; animation-delay: -9s; width: 1px; height: 1px; }
+.sparks span:nth-child(19) { left: 68%; animation-duration: 16s; animation-delay: -6s; width: 1px; height: 1px; }
+.sparks span:nth-child(20) { left: 92%; animation-duration: 14s; animation-delay: -4s; width: 1px; height: 1px; }
 
 @media (prefers-reduced-motion: reduce) {
-  h1 { animation: none; }
+  .logo, .dot { animation: none; }
   .sparks span { animation: none; opacity: 0.4; }
 }
