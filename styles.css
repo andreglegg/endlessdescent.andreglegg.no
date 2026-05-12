@@ -111,52 +111,37 @@ body::before {
   50%      { opacity: 0.4; transform: scale(0.85); }
 }
 
-.byline {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: calc(48px + env(safe-area-inset-bottom));
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.78rem;
-  letter-spacing: 0.06em;
-}
-
-.legal {
+.foot {
   position: absolute;
   z-index: 3;
   left: 0;
   right: 0;
-  bottom: calc(18px + env(safe-area-inset-bottom));
+  bottom: calc(22px + env(safe-area-inset-bottom));
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 8px;
-  color: rgba(255, 246, 221, 0.35);
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
 }
 
-.legal a {
-  color: rgba(255, 246, 221, 0.55);
-  text-decoration: none;
-  padding: 4px 2px;
-}
-
-.legal a:hover {
-  color: var(--gold);
-}
-
-.byline a {
+.foot a {
   color: var(--ink);
   text-decoration: none;
+  padding: 4px 2px;
   border-bottom: 1px solid rgba(255, 246, 221, 0.25);
-  padding-bottom: 1px;
   transition: color 0.2s, border-color 0.2s;
 }
 
-.byline a:hover {
+.foot a:hover {
   color: var(--gold);
   border-bottom-color: var(--gold);
+}
+
+.foot .sep {
+  color: rgba(255, 246, 221, 0.25);
 }
 
 .sparks {
