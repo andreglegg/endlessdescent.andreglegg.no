@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Endless Descent</title>
+    <meta
+      name="description"
+      content="Endless Descent is a mobile first arcade game about sliding down a cursed tower, kicking between walls, dodging traps, and chasing depth."
+    >
+    <meta property="og:title" content="Endless Descent">
+    <meta
+      property="og:description"
+      content="Slide down, kick off walls, dodge traps, and keep descending."
+    >
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://endlessdescent.andreglegg.no/">
+    <meta property="og:image" content="https://endlessdescent.andreglegg.no/assets/concept.png">
+    <meta name="theme-color" content="#10131a">
+    <link rel="canonical" href="https://endlessdescent.andreglegg.no/">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main>
+      <section class="hero" aria-labelledby="title">
+        <div class="hero__image" aria-hidden="true"></div>
+        <div class="hero__shade" aria-hidden="true"></div>
+        <div class="hero__content">
+          <p class="eyebrow">Mobile arcade roguelite prototype</p>
+          <h1 id="title">Endless Descent</h1>
+          <p class="hero__copy">
+            Slide down a cursed tower, kick between walls, dodge spikes,
+            saws, arrows, and crushers, then push your depth score further
+            every run.
+          </p>
+          <div class="hero__actions" aria-label="Primary links">
+            <a class="button button--primary" href="#status">Project status</a>
+            <a class="button button--ghost" href="https://andreglegg.no/">Andre Glegg</a>
+          </div>
+        </div>
+        <div class="hud-strip" aria-label="Prototype highlights">
+          <span><strong>Godot 4.6</strong> target</span>
+          <span><strong>9:16</strong> portrait first</span>
+          <span><strong>Depth</strong> chase score</span>
+        </div>
+      </section>
+
+      <section class="section section--dark" id="status">
+        <div class="section__inner">
+          <div class="section__header">
+            <p class="eyebrow">In development</p>
+            <h2>Built around fast wall kicks and readable trap timing.</h2>
+          </div>
+          <div class="feature-grid">
+            <article>
+              <span class="feature-mark feature-mark--gold"></span>
+              <h3>Tap to cross</h3>
+              <p>
+                The player slides on one wall, then kicks across the shaft to
+                catch the opposite side while still falling.
+              </p>
+            </article>
+            <article>
+              <span class="feature-mark feature-mark--red"></span>
+              <h3>Threat lanes</h3>
+              <p>
+                Spikes, saws, arrow traps, and crushers pressure the route with
+                clear warnings and quick restarts.
+              </p>
+            </article>
+            <article>
+              <span class="feature-mark feature-mark--purple"></span>
+              <h3>Risk rewards</h3>
+              <p>
+                Coins, gems, combos, and depth scoring reward clean movement
+                through tighter tower chunks.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--split" aria-labelledby="visual-target">
+        <div class="section__inner split">
+          <div>
+            <p class="eyebrow">Visual target</p>
+            <h2 id="visual-target">Dark fantasy arcade, tuned for mobile readability.</h2>
+            <p>
+              The MVP is using procedural placeholder art, but the target is a
+              chunky stone shaft with warm torch accents, glowing purple gems,
+              gold pickups, metal traps, and a small heroic rogue.
+            </p>
+          </div>
+          <figure>
+            <img src="assets/concept.png" alt="Endless Descent concept art showing a hero falling through a trap filled tower.">
+          </figure>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
