@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Download &middot; Endless Descent</title>
+    <meta name="description" content="Redeem your access key to download the Endless Descent Android test build.">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#05070a">
+    <link rel="canonical" href="https://endlessdescent.andreglegg.no/download/">
+    <link rel="stylesheet" href="/docs.css">
+    <style>
+      .key-form {
+        margin: 0 0 24px;
+        padding: 22px 22px 18px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--card);
+      }
+      .key-form label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        color: var(--ink);
+      }
+      .key-input {
+        width: 100%;
+        padding: 14px 14px;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        background: rgba(0, 0, 0, 0.35);
+        color: var(--ink);
+        font-family: ui-monospace, "SF Mono", Menlo, monospace;
+        font-size: 1.1rem;
+        letter-spacing: 0.12em;
+        text-align: center;
+        text-transform: uppercase;
+      }
+      .key-input:focus {
+        outline: none;
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px rgba(255, 200, 87, 0.18);
+      }
+      .actions {
+        margin-top: 14px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .btn {
+        min-height: 48px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 22px;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        font: inherit;
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        cursor: pointer;
+        text-decoration: none;
+        transition: transform 0.12s, filter 0.15s, opacity 0.15s;
+      }
+      .btn--primary {
+        color: #1b1204;
+        background: linear-gradient(180deg, #ffc857, #ff9b2f);
+        border-color: rgba(255, 200, 87, 0.8);
+      }
+      .btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
+      .btn[disabled] { opacity: 0.5; cursor: not-allowed; transform: none; }
+      .status {
+        margin-top: 16px;
+        min-height: 24px;
+        font-size: 0.9rem;
+      }
+      .status.error { color: #ff8d80; }
+      .status.success { color: var(--gold); }
+      .status.info { color: var(--muted); }
+      .download-card {
+        margin: 24px 0;
+        padding: 20px 22px;
+        border: 1px solid rgba(255, 200, 87, 0.4);
+        border-radius: 12px;
+        background: rgba(255, 200, 87, 0.06);
+        display: none;
+      }
+      .download-card.show { display: block; }
+      .download-card h2 {
+        margin: 0 0 8px;
+        font-size: 1.05rem;
+        color: var(--ink);
+      }
+      .download-card p {
+        margin: 0 0 14px;
+        color: rgba(255, 246, 221, 0.82);
+        font-size: 0.92rem;
+      }
+      .download-card .countdown {
+        color: var(--gold);
+        font-weight: 700;
+      }
+      .spinner {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        border: 2px solid rgba(255, 246, 221, 0.25);
+        border-top-color: var(--gold);
+        animation: spin 0.8s linear infinite;
+        display: inline-block;
+        margin-right: 8px;
+        vertical-align: -3px;
+      }
+      @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+  </head>
+  <body>
+    <header class="page-header">
+      <a class="home" href="/">
+        <img src="/assets/logo.webp" alt="Endless Descent">
+      </a>
+      <nav>
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+      </nav>
+    </header>
+
+    <main class="doc">
+      <h1>Test build access</h1>
+      <p class="meta">Android &middot; Early build</p>
+
+      <p>
+        Have an access key? Enter it below to get a one-time download link for
+        the Endless Descent Android test build. Links expire after 5 minutes.
+      </p>
+
+      <form class="key-form" id="keyForm" novalidate>
+        <label for="key">Access key</label>
+        <input
+          id="key"
+          name="key"
+          class="key-input"
+          type="text"
+          autocomplete="off"
+          spellcheck="false"
+          autocapitalize="characters"
+          inputmode="text"
+          placeholder="ED-XXXX-XXXX"
+          maxlength="14"
+          required
+        >
+        <div class="actions">
+          <button type="submit" class="btn btn--primary" id="submitBtn">
+            Get download link
+          </button>
+        </div>
+        <div class="status" id="status" role="status" aria-live="polite"></div>
+      </form>
+
+      <div class="download-card" id="downloadCard">
+        <h2>Your download is ready</h2>
+        <p>
+          The link below works for <span class="countdown" id="countdown">5:00</span>.
+          On Android, you may need to allow installation from this browser in
+          system settings before opening the APK.
+        </p>
+        <a class="btn btn--primary" id="downloadLink" href="#">Download APK</a>
+      </div>
+
+      <h2>Installing on Android</h2>
+      <ol>
+        <li>Tap <strong>Download APK</strong> above on your Android device.</li>
+        <li>
+          When prompted, allow your browser to install unknown apps
+          (<em>Settings &rarr; Apps &rarr; Special access &rarr; Install unknown
+          apps</em>). This is required for any APK installed outside Google Play.
+        </li>
+        <li>Open the downloaded file and tap <strong>Install</strong>.</li>
+        <li>Launch <strong>Endless Descent</strong>.</li>
+      </ol>
+
+      <h2>Reporting bugs</h2>
+      <p>
+        Send feedback or crashes to
+        <a href="mailto:andreglegg@me.com?subject=Endless%20Descent%20test%20build">andreglegg@me.com</a>.
+        Include your device model, Android version, and what you were doing
+        when it broke.
+      </p>
+    </main>
+
+    <footer class="page-footer">
+      <nav>
+        <a href="/">Home</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+        <a href="/delete/">Delete data</a>
+      </nav>
+      &copy; 2026 Andre Glegg
+    </footer>
+
+    <script>
+      (function () {
+        var API = "https://download.andreglegg.no/redeem";
+        var form = document.getElementById("keyForm");
+        var input = document.getElementById("key");
+        var btn = document.getElementById("submitBtn");
+        var status = document.getElementById("status");
+        var card = document.getElementById("downloadCard");
+        var link = document.getElementById("downloadLink");
+        var countdownEl = document.getElementById("countdown");
+
+        function normalize(v) {
+          v = (v || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+          if (v.length > 2 && !v.startsWith("ED")) v = "ED" + v;
+          var rest = v.replace(/^ED/, "");
+          var a = rest.slice(0, 4);
+          var b = rest.slice(4, 8);
+          var out = "ED";
+          if (a) out += "-" + a;
+          if (b) out += "-" + b;
+          return out;
+        }
+
+        input.addEventListener("input", function () {
+          var caret = input.selectionStart;
+          var before = input.value;
+          var after = normalize(before);
+          if (after !== before) {
+            input.value = after;
+            try { input.setSelectionRange(after.length, after.length); } catch (_) {}
+          }
+        });
+
+        // Prefill from ?key=... if someone sends a deep link
+        var params = new URLSearchParams(window.location.search);
+        var preset = params.get("key") || params.get("k") || "";
+        if (preset) input.value = normalize(preset);
+
+        function setStatus(msg, cls) {
+          status.textContent = msg;
+          status.className = "status " + (cls || "");
+        }
+
+        function startCountdown(seconds) {
+          var end = Date.now() + seconds * 1000;
+          function tick() {
+            var remaining = Math.max(0, Math.round((end - Date.now()) / 1000));
+            var m = Math.floor(remaining / 60);
+            var s = remaining % 60;
+            countdownEl.textContent = m + ":" + String(s).padStart(2, "0");
+            if (remaining <= 0) {
+              card.classList.remove("show");
+              setStatus("Link expired — redeem your key again to get a new one.", "info");
+              return;
+            }
+            setTimeout(tick, 250);
+          }
+          tick();
+        }
+
+        form.addEventListener("submit", async function (e) {
+          e.preventDefault();
+          card.classList.remove("show");
+          var key = normalize(input.value);
+          if (!/^ED-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(key)) {
+            setStatus("That doesn't look like a valid key. Format: ED-XXXX-XXXX", "error");
+            return;
+          }
+          btn.disabled = true;
+          setStatus("", "");
+          var spin = document.createElement("span");
+          spin.className = "spinner";
+          status.innerHTML = "";
+          status.appendChild(spin);
+          status.appendChild(document.createTextNode("Checking your key…"));
+          status.className = "status info";
+
+          try {
+            var res = await fetch(API, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ key: key })
+            });
+            if (res.status === 401) {
+              setStatus("That key isn't valid. Check it and try again.", "error");
+              return;
+            }
+            if (!res.ok) {
+              setStatus("Something went wrong on our side (HTTP " + res.status + "). Try again in a moment.", "error");
+              return;
+            }
+            var data = await res.json();
+            if (!data.url) {
+              setStatus("Unexpected response. Try again or contact andreglegg@me.com.", "error");
+              return;
+            }
+            link.href = data.url;
+            card.classList.add("show");
+            setStatus("Key accepted.", "success");
+            startCountdown(data.expires_in || 300);
+            card.scrollIntoView({ behavior: "smooth", block: "center" });
+          } catch (err) {
+            setStatus("Couldn't reach the download server. Check your connection.", "error");
+          } finally {
+            btn.disabled = false;
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
